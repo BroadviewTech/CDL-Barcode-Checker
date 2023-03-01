@@ -1,0 +1,357 @@
+2022-12-29 16:14:15,640 Exception on /lookup [POST]
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2108, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 700, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1817, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1834, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b"Login failed for user 'CDL_VPOD'.DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\n")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2336, in _wrap_pool_connect
+    return fn()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 139, in _do_get
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 660, in __connect
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\default.py", line 508, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b"Login failed for user 'CDL_VPOD'.DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\n")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "D:\CDL\CDL-Barcode-Checker\.\barcode_checker\main\routes.py", line 34, in lookup_rte
+    records = [r._asdict() for r in dbquery.all()]
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3373, in all
+    return list(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3535, in __iter__
+    return self._execute_and_instances(context)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3556, in _execute_and_instances
+    conn = self._get_bind_args(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3571, in _get_bind_args
+    return fn(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3550, in _connection_from_session
+    conn = self.session.connection(**kw)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\session.py", line 1142, in connection
+    return self._connection_for_bind(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\session.py", line 1150, in _connection_for_bind
+    return self.transaction._connection_for_bind(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\session.py", line 433, in _connection_for_bind
+    conn = bind._contextual_connect()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2302, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 1583, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2336, in _wrap_pool_connect
+    return fn()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 139, in _do_get
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 660, in __connect
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\default.py", line 508, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+sqlalchemy.exc.OperationalError: (pymssql._pymssql.OperationalError) (18456, b"Login failed for user 'CDL_VPOD'.DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\n")
+(Background on this error at: http://sqlalche.me/e/13/e3q8)
+2022-12-29 16:14:25,339 Exception on /lookup [POST]
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2108, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 700, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1817, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1834, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2336, in _wrap_pool_connect
+    return fn()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 139, in _do_get
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 660, in __connect
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\default.py", line 508, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\n')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "D:\CDL\CDL-Barcode-Checker\.\barcode_checker\main\routes.py", line 34, in lookup_rte
+    records = [r._asdict() for r in dbquery.all()]
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3373, in all
+    return list(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3535, in __iter__
+    return self._execute_and_instances(context)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3556, in _execute_and_instances
+    conn = self._get_bind_args(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3571, in _get_bind_args
+    return fn(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3550, in _connection_from_session
+    conn = self.session.connection(**kw)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\session.py", line 1142, in connection
+    return self._connection_for_bind(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\session.py", line 1150, in _connection_for_bind
+    return self.transaction._connection_for_bind(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\session.py", line 433, in _connection_for_bind
+    conn = bind._contextual_connect()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2302, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 1583, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2336, in _wrap_pool_connect
+    return fn()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 139, in _do_get
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 660, in __connect
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\default.py", line 508, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+sqlalchemy.exc.OperationalError: (pymssql._pymssql.OperationalError) (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\n')
+(Background on this error at: http://sqlalche.me/e/13/e3q8)
+2022-12-29 16:14:37,884 Exception on /lookup [POST]
+Traceback (most recent call last):
+  File "src\pymssql\_pymssql.pyx", line 646, in pymssql._pymssql.connect
+  File "src\pymssql\_mssql.pyx", line 2108, in pymssql._mssql.connect
+  File "src\pymssql\_mssql.pyx", line 700, in pymssql._mssql.MSSQLConnection.__init__
+  File "src\pymssql\_mssql.pyx", line 1817, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src\pymssql\_mssql.pyx", line 1834, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2336, in _wrap_pool_connect
+    return fn()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 139, in _do_get
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 660, in __connect
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\default.py", line 508, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\n')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "D:\CDL\CDL-Barcode-Checker\.\barcode_checker\main\routes.py", line 34, in lookup_rte
+    records = [r._asdict() for r in dbquery.all()]
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3373, in all
+    return list(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3535, in __iter__
+    return self._execute_and_instances(context)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3556, in _execute_and_instances
+    conn = self._get_bind_args(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3571, in _get_bind_args
+    return fn(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\query.py", line 3550, in _connection_from_session
+    conn = self.session.connection(**kw)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\session.py", line 1142, in connection
+    return self._connection_for_bind(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\session.py", line 1150, in _connection_for_bind
+    return self.transaction._connection_for_bind(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\orm\session.py", line 433, in _connection_for_bind
+    conn = bind._contextual_connect()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2302, in _contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2339, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 1583, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\base.py", line 2336, in _wrap_pool_connect
+    return fn()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 364, in connect
+    return _ConnectionFairy._checkout(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 778, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 495, in checkout
+    rec = pool._do_get()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 139, in _do_get
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\impl.py", line 137, in _do_get
+    return self._create_connection()
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 309, in _create_connection
+    return _ConnectionRecord(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 440, in __init__
+    self.__connect(first_connect_check=True)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 660, in __connect
+    with util.safe_reraise():
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\util\compat.py", line 182, in raise_
+    raise exception
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\pool\base.py", line 656, in __connect
+    connection = pool._invoke_creator(self)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\strategies.py", line 114, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "D:\CDL\CDL-Barcode-Checker\cdl_barcode_checker\lib\site-packages\sqlalchemy\engine\default.py", line 508, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "src\pymssql\_pymssql.pyx", line 652, in pymssql._pymssql.connect
+sqlalchemy.exc.OperationalError: (pymssql._pymssql.OperationalError) (18456, b'DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\nDB-Lib error message 20002, severity 9:\nAdaptive Server connection failed (172.24.32.210)\n')
+(Background on this error at: http://sqlalche.me/e/13/e3q8)

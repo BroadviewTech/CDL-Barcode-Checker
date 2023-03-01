@@ -1,0 +1,6 @@
+cdl_barcode_checker/*
+/cdl_barcode_checker
+cdl_barcode_checker/
+__pycache__/
+sequence.py
+.env
