@@ -5,8 +5,10 @@ from barcode_checker.models import (
     ClientMaster
 )
 from barcode_checker import db
+from datetime import datetime
 
 import os
+
 
 main = Blueprint('main', __name__)
 
@@ -20,6 +22,16 @@ def home():
 @main.route("/lookup", methods=["POST"])
 def lookup_rte():
     barcode = request.form.get("barcode")
+
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    file_path = os.path.join(dir_path, "scan_logs.txt")
+    append_write = 'w' 
+    if os.path.exists(file_path):
+        append_write = 'a' # append if already exists
+        
+    with open(file_path, append_write) as f:
+        f.write(str(datetime.now()) + ' - '  + str(barcode))
+        f.write('\n')
    
     dbquery = db.session.query(
         ClientMaster.AccountNo,
@@ -33,8 +45,10 @@ def lookup_rte():
     dbquery = dbquery.filter(OrderPackageItems.RefNo == barcode)
     dbquery = dbquery.filter(Orders.Status == 'N')
     records = [r._asdict() for r in dbquery.all()]
+
     if len(records) > 0: 
         res = records[0]
         return render_template('record.html', account_no = res['AccountNo'], company_name=res['CompanyName'], order_tracking_id=res['OrderTrackingID'], client_ref_no=res['ClientRefNo'], refNo=res['RefNo'], sort_code=res['DSortCode'])
     return render_template('no_record.html')
     
+ 
