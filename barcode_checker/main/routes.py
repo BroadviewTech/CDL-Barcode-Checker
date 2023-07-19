@@ -22,9 +22,10 @@ def home():
 @main.route("/lookup", methods=["POST"])
 def lookup_rte():
     barcode = request.form.get("barcode")
-
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    file_path = os.path.join(dir_path, "scan_logs.txt")
+    format_data = "%m_%d_%y"
+    log_date = datetime.now().strftime(format_data)
+    filename = log_date + '_log.txt'
+    file_path = os.path.join('D:', os.sep, 'CDL\CDL-Barcode-Checker\Logs', filename)
     append_write = 'w' 
     if os.path.exists(file_path):
         append_write = 'a' # append if already exists
